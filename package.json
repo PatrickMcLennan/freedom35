@@ -10,10 +10,9 @@
 		"pug": "pug -w './src/index.pug' -o './dist'",
 		"watch": "concurrently 'npm run sass' 'npm run babel' 'npm run eslint' 'npm run pug'",
 		"minify-html": "html-minifier --collapes-whitespace --remove-comments --remove-tag-whitespace './dist/index.html' -o './dist/index.html'",
-		"prefix": "postcss './dist/style.css' -u autoprefixer -o './dist/style.css'",
-		"minify-css": "postcss './dist/style.css' -u cssnano -o './dist/style.css'",
+		"prefix": "postcss './dist/style.css' -o './dist/style.css' -u autoprefixer cssnano",
 		"minify-js": "uglifyjs './dist/app.js' -c -m -o './dist/app.js'",
-		"build": "concurrently 'npm run minify-html' 'npm run prefix' 'npm run minify-css' 'npm run minify-js'"
+		"build": "concurrently 'npm run minify-html' 'npm run prefix' 'npm run minify-js'"
 	},
 	"keywords": [],
 	"author": "",
@@ -33,5 +32,6 @@
 		"pug": "^2.0.4",
 		"pug-cli": "^1.0.0-alpha6",
 		"uglify-js": "^3.6.0"
-	}
+	},
+	"browserslist": "last 10 versions"
 }

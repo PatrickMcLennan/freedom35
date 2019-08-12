@@ -27,7 +27,28 @@ html(lang="en")
                     for navItem in [{href: '#about', display: 'About'}, {href: '#story', display: 'Our Story'}, {href: '#products', display: 'Our Products'}, {href: '#contact', display: 'Contact Us'}]
                         li.nav_li_mobile
                             a.nav__mobile(href=navItem.href) #{navItem.display}
+
         main.main
+            //- MODALS
+            - const modals = ['Skiing in the Alps', 'Broadway at night', 'One with nature']
+            - const aboutModalClasses = ['_ski', '_new-york', '_wilderness']
+            - const aboutModalPics = [0,6,8]
+            - const aboutModalInputs = [{type: 'text', placeholder: 'First Name', required: true}, {type: 'text', placeholder: 'Last Name', required: true}, {type: 'email', placeholder: 'Email', required: true}, {type: 'number', placeholder: 'Phone Number', required: false}]
+
+            .backdrop#backdrop
+                for modal in modals
+                    figure.modal(class="about" + aboutModalClasses[modals.indexOf(modal)])
+                        picture.modal_picture
+                            source(media="(max-width: 750px)", srcset="../img/picture-" + aboutModalPics[modals.indexOf(modal)] + "-sml.jpg")
+                            source(media="(min-width: 751px)", srcset="../img/picture-" + aboutModalPics[modals.indexOf(modal)] + "-lrg.jpg")
+                            img(src="../img/picture-" + aboutModalPics[modals.indexOf(modal)] + "-sml.jpg", alt=modal)
+                        figcaption.modal_figcaption 
+                        h4.modal_header Sign up today to learn more about 
+                            span.modal_span #{modal}
+                        form.modal_form
+                            span.modal_form_span Please fill out all required fields
+                            for input in aboutModalInputs
+                                input(class=input.required ? "modal_text_input modal_text_input_" + aboutModalPics[modals.indexOf(modal)] : modal_text_input, type=input.type, placeholder=input.placeholder, required=input.required)
 
             section.jumbotron
                 button.jumbotron-left-arrow &lt;
@@ -41,7 +62,7 @@ html(lang="en")
                     figure.jumbotron_figure.viewport-offset-0
                         picture.jumbotron_picture
                             source(media="(max-width: 750px)", srcset="../img/picture-" + number + "-sml.jpg")
-                            source(media="(min-width: 751px)", srcset="../img/picture-" + number + "-lrg.jpg")/
+                            source(media="(min-width: 751px)", srcset="../img/picture-" + number + "-lrg.jpg")
                             img.jumbotron_picture_img(src="../img/picture-" + number + "-sml.jg", alt="#{pictureHeaders[jumbotronPictureNumbers.indexOf(number)]}")
                         figcaption.jumbotron_figcaption
                             h2.jumbotron_headline #{pictureHeaders[jumbotronPictureNumbers.indexOf(number)]}
@@ -57,18 +78,30 @@ html(lang="en")
 
                 .about_content
                     for picture in aboutPictureNumbers
-                        picture.about_picture
-                            source(media="(max-width: 750px)", srcset="../img/picture-" + picture + "-sml.jpg")
-                            source(media="(min-width: 751px)", srcset="../img/picture-" + picture + "-lrg.jpg")
-                            img.about_picture_img(src="../img/picture-" + picture + "-sml.jg", alt="#{aboutTaglines[aboutPictureNumbers.indexOf(picture)]}")
+                        .about_picture_box
+                            picture.about_picture
+                                source(media="(max-width: 750px)", srcset="../img/picture-" + picture + "-sml.jpg")
+                                source(media="(min-width: 751px)", srcset="../img/picture-" + picture + "-lrg.jpg")
+                                img.about_picture_img(src="../img/picture-" + picture + "-sml.jg", alt="#{aboutTaglines[aboutPictureNumbers.indexOf(picture)]}")
+                            button.about_picture_button(class="about_picture_button_" + picture) Inquire Today
                     .about_text_box
-                        h6.about_text_box_heading Let us help you achieve yours
                         h6.about_placeholder Hover over an image to learn more
+                        h6.about_text_box_heading Let us help you achieve yours
                         for picture in aboutPictureNumbers
                             h4.about_text_header #{aboutTaglines[aboutPictureNumbers.indexOf(picture)]}
                             p.about_text_copy Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem in dignissimos commodi odio quidem aperiam fuga praesentium vel perferendis vitae necessitatibus magni qui sunt dolorem sed fugit ducimus voluptatum ut quis magnam dolores sit accusamus, laborum voluptates? Expedita libero porro, deserunt non ad fuga reprehenderit cum adipisci similique blanditiis beatae!
 
-
+                .about_content_mobile
+                    h6.about_text_box_heading_mobile Let us help you achieve yours
+                    for picture in aboutPictureNumbers
+                        div(class="about_picture_box_mobile about_picture_mobile_box_" + picture)
+                            picture.about_picture_mobile
+                                source(media="(max-width: 750px)", srcset="../img/picture-" + picture + "-sml.jpg")
+                                source(media="(min-width: 751px)", srcset="../img/picture-" + picture + "-lrg.jpg")
+                                img.about_picture_img_mobile(src="../img/picture-" + picture + "-sml.jg", alt="#{aboutTaglines[aboutPictureNumbers.indexOf(picture)]}")
+                            button.about_picture_button_mobile(class="about_picture_button_" + picture) Inquire Today
+                            h4.about_text_header_mobile #{aboutTaglines[aboutPictureNumbers.indexOf(picture)]}
+                            p.about_text_copy_mobile Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem in dignissimos commodi odio quidem aperiam fuga praesentium vel perferendis vitae necessitatibus magni qui sunt dolorem sed fugit ducimus voluptatum ut quis magnam dolores sit accusamus, laborum voluptates? Expedita libero porro, deserunt non ad fuga reprehenderit cum adipisci similique blanditiis beatae!
 
 
             section.story#story 
